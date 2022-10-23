@@ -1,0 +1,19 @@
+name: bdaya_flutter_common
+description: Base Library for Bdaya Development Projects
+version: 0.0.1
+homepage: https://github.com/Bdaya-Dev/bdaya_flutter_common
+
+environment:
+  sdk: ">=2.18.2 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  bdaya_shared_value: ^3.1.0
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
