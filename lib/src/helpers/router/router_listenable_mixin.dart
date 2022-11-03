@@ -8,7 +8,11 @@ mixin RouterListenableMixin on BdayaStreamHandlerMixin {
   void onRouteInformationChanged(RouteInformation routeInformation);
   bool get callOnRouteChangedInitially => true;
   void _onRouteInformationChanged() {
-    onRouteInformationChanged(goRouter.routeInformationProvider.value);
+    final value = goRouter.routeInformationProvider.value;
+    onRouteInformationChanged(value);
+    logger.finest(
+      'onRouteInformationChanged, location: ${value.location}, state: ${value.state}',
+    );
   }
 
   //TODO(ahmednfwela): add SharedValue<GoRouterState> ?

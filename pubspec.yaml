@@ -6,6 +6,11 @@ homepage: https://github.com/Bdaya-Dev/bdaya_flutter_common
 environment:
   sdk: ">=2.18.2 <3.0.0"
   flutter: ">=1.17.0"
+flutter:
+  uses-material-design: true
+flutter_intl:
+  enabled: true
+  class_name: BdayaLocalizations
 
 dependencies:
   flutter:
@@ -17,11 +22,16 @@ dependencies:
   logging: ^1.1.0
   tuple: ^2.0.1
   rxdart: ^0.27.5
-  
+  reactive_forms: ^14.1.0
+  collection: ^1.16.0
+  injectable: ^1.5.4
+  intl: ^0.17.0
+  url_strategy: ^0.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-
-flutter:
+  injectable_generator: ^1.5.4
+  build_runner: ^2.3.2
+  intl_utils: ^2.7.0
