@@ -1,6 +1,7 @@
 import 'package:example/common.dart';
 
+@lazySingleton
 class PublicHomeController extends BdayaCombinedRouteController {
   @override
-  void onRouteInformationChanged(RouteInformation routeInformation) {}
+  void onRouteInformationChanged(GoRouterRouteMatch route) {}
 }

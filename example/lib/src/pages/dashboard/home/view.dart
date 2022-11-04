@@ -11,6 +11,14 @@ class DashboardHomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      children: [
+        const Text('Dashboard Home View'),
+        ElevatedButton(
+          onPressed: () => context.goNamed(AppRouteNames.kOrders),
+          child: const Text('Go to orders'),
+        ),
+      ],
+    );
   }
 }

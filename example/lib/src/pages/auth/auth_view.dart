@@ -9,6 +9,7 @@ class AuthView extends StatelessWidget {
   final AuthController controller;
   @override
   Widget build(BuildContext context) {
+    final isLoading = controller.isLoading.of(context);
     final authState = controller.authService.isAuthed.of(context);
     return Scaffold(
       body: Column(
@@ -16,12 +17,15 @@ class AuthView extends StatelessWidget {
         children: [
           const Text('Auth Screen'),
           const SizedBox(height: 8),
-          ElevatedButton(
-            onPressed: authState ? controller.login : controller.logout,
-            child: Text(
-              authState ? 'Login' : 'Logout',
+          if (isLoading)
+            const CircularProgressIndicator()
+          else
+            ElevatedButton(
+              onPressed: authState ? controller.logout : controller.login,
+              child: Text(
+                authState ? 'Logout' : 'Login',
+              ),
             ),
-          ),
         ],
       ),
     );

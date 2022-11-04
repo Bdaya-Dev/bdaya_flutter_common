@@ -24,6 +24,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   bdaya_flutter_common:
     path: ../
 
@@ -32,6 +34,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   intl: ^0.17.0
   injectable: ^1.5.4
+  get_it: ^7.2.0
+  async: ^2.9.0
 
 dev_dependencies:
   flutter_test:

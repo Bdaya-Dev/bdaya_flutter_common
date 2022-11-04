@@ -1,28 +1,27 @@
-import 'package:bdaya_shared_value/bdaya_shared_value.dart';
+import 'package:bdaya_flutter_common/bdaya_flutter_common.dart';
 import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
 
-abstract class AppThemeServiceBase {
-  final locale = SharedValue<Locale>(
-    value: const Locale('ar'),
-    autosave: true,
+abstract class AppThemeServiceBase with BdayaLoggableMixin {
+  final locale = SharedValue<Locale?>(
+    value: null,
     key: 'locale',
     customEncode: (v) {
-      return v.languageCode;
+      return v?.languageCode;
     },
     customDecode: (v) {
-      return Locale(v);
+      if (v.isNullOrEmpty) return null;
+      return Locale(v!);
     },
   );
-  final themeMode = SharedValue<ThemeMode>(
-    value: ThemeMode.light,
-    autosave: true,
+  final themeMode = SharedValue<ThemeMode?>(
+    value: null,
     key: 'theme',
     customEncode: (v) {
-      return v.name;
+      return v?.name;
     },
     customDecode: (v) {
-      return ThemeMode.values.byName(v);
+      if (v.isNullOrEmpty) return null;
+      return ThemeMode.values.byName(v!);
     },
   );
 
@@ -37,17 +36,25 @@ abstract class AppThemeServiceBase {
 class LocalAppThemeService extends AppThemeServiceBase {
   @override
   Future<void> init() async {
+    logger.fine('Initializing ...');
     await themeMode.load();
     await locale.load();
+    logger.fine('Initialization Done.');
   }
 
   @override
   Future<void> setLocale(Locale newLocale) async {
+    logger.fine('Setting Locale ...');
     locale.$ = newLocale;
+    await locale.save();
+    logger.fine('Setting Locale Done.');
   }
 
   @override
   Future<void> setThemeMode(ThemeMode mode) async {
+    logger.fine('Setting Theme Mode ...');
     themeMode.$ = mode;
+    await themeMode.save();
+    logger.fine('Setting Theme Mode Done.');
   }
 }

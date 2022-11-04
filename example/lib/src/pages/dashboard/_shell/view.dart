@@ -12,6 +12,31 @@ class DashboardShellView extends StatelessWidget {
   final Widget child;
   @override
   Widget build(BuildContext context) {
-    return child;
+    return Scaffold(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  'Dashboard Shell',
+                  style: TextStyle(
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+              const Spacer(),
+              ElevatedButton(
+                onPressed: () => controller.authService.logout(),
+                child: const Text("Logout"),
+              ),
+            ],
+          ),
+          Expanded(child: child),
+        ],
+      ),
+    );
   }
 }

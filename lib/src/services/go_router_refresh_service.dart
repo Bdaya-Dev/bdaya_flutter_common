@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bdaya_flutter_common/bdaya_flutter_common.dart';
 import 'package:flutter/foundation.dart';
-import 'package:injectable/injectable.dart';
 
 /// should be registered as a singleton and passed to [GoRouteInformationProvider.refreshListenable]
 @lazySingleton
