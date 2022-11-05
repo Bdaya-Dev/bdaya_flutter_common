@@ -1,4 +1,4 @@
-![bdaya-dev.com](docs/media/logo.jpg)
+![bdaya-dev.com](doc/media/logo.jpg)
 
 We made this library to combine and standarize the common code we use in our projects into a single package.
 
