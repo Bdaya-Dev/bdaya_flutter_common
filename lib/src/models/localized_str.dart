@@ -6,10 +6,10 @@ class LocalizedStr {
   static const kEn = 'en';
 
   /// The default locales for the app, can be changed during runtime
-  static List<String> locales = [
-    kEn,
-    kAr,
-  ];
+  // static List<String> locales = [
+  //   kEn,
+  //   kAr,
+  // ];
 
   /// The default rtl locales
   static Set<String> rtlLocales = {kAr};

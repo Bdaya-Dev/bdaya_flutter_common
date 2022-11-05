@@ -6,11 +6,22 @@ abstract class AppThemeServiceBase with BdayaLoggableMixin {
     value: null,
     key: 'locale',
     customEncode: (v) {
-      return v?.languageCode;
+      return v?.toLanguageTag();
     },
     customDecode: (v) {
       if (v.isNullOrEmpty) return null;
-      return Locale(v!);
+      final split = v!.split('-');
+      final langCode = split[0];
+      final country = split.length > 1 ? split.last : null;
+      final script = split.length > 2 ? split[1] : null;
+      //en => langCode
+      //en-US => langCode-countryCode
+      //zn-Hans-CN => langCode-scriptCode-countryCode
+      return Locale.fromSubtags(
+        languageCode: langCode,
+        scriptCode: script,
+        countryCode: country,
+      );
     },
   );
   final themeMode = SharedValue<ThemeMode?>(
@@ -39,12 +50,13 @@ class LocalAppThemeService extends AppThemeServiceBase {
     logger.fine('Initializing ...');
     await themeMode.load();
     await locale.load();
-    logger.fine('Initialization Done.');
+    logger.fine(
+        'Initialization Done, themeMode: ${themeMode.$?.name}, locale: ${locale.$?.toLanguageTag()}.');
   }
 
   @override
   Future<void> setLocale(Locale newLocale) async {
-    logger.fine('Setting Locale ...');
+    logger.fine('Setting Locale to ${newLocale.toLanguageTag()}...');
     locale.$ = newLocale;
     await locale.save();
     logger.fine('Setting Locale Done.');
@@ -52,7 +64,7 @@ class LocalAppThemeService extends AppThemeServiceBase {
 
   @override
   Future<void> setThemeMode(ThemeMode mode) async {
-    logger.fine('Setting Theme Mode ...');
+    logger.fine('Setting Theme Mode to ${mode.name}...');
     themeMode.$ = mode;
     await themeMode.save();
     logger.fine('Setting Theme Mode Done.');

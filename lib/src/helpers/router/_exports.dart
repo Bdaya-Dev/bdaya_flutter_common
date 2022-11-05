@@ -1,2 +1,3 @@
 export 'router_listenable_mixin.dart';
-export 'router_state_hook.dart';
+//useless after GoRouter v5.1.3
+// export 'router_state_hook.dart';

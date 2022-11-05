@@ -109,7 +109,11 @@ class ReactiveLocalizedFormField extends ReactiveFormField<LocalizedStr,
                 }
               }
             }
-            locales ??= LocalizedStr.locales;
+            locales ??= field.context
+                .findAncestorWidgetOfExactType<WidgetsApp>()
+                ?.supportedLocales
+                .map((e) => e.toLanguageTag())
+                .toList();
             rtlLocales ??= LocalizedStr.rtlLocales;
             final children = locales!.map((locale) {
               final fieldController = value[locale];
@@ -128,8 +132,10 @@ class ReactiveLocalizedFormField extends ReactiveFormField<LocalizedStr,
 //?.call(field.control)
 
 // field.control.errors
-              field.errorText;
-              final messages = field.widget.validationMessages ?? {};
+              // field.errorText;
+              final messages = field.widget.validationMessages ??
+                  ReactiveFormConfig.of(field.context)?.validationMessages ??
+                  {};
               final errorsForCurrentLocale = errorsPerLocale[locale];
               final error = errorsForCurrentLocale?.firstOrNull;
               final errorText =

@@ -93,14 +93,14 @@ List<RouteBase> appRoutesList(GoRouterRefreshService goRouterRefreshService) =>
                 path: '/dashboard',
                 name: AppRouteNames.kDashboardHome,
                 redirect: (context, state) {
+                  final router = GoRouter.of(context);
                   final authService = getIt<AuthService>();
                   final isAuthed = authService.isAuthed.$;
 
                   if (!isAuthed) {
-                    final newUrl =
-                        Uri.parse(state.namedLocation(AppRouteNames.kAuth))
-                            .replace(
-                      queryParameters: {
+                    final newUrl = router.namedLocation(
+                      AppRouteNames.kAuth,
+                      queryParams: {
                         kReturnTo: state.location,
                       },
                     );

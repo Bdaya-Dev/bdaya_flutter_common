@@ -1,39 +1,39 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+![bdaya-dev.com](docs/media/logo.jpg)
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+We made this library to combine and standarize the common code we use in our projects into a single package.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+Feel free to use it, but on your own risk.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+WARNING: This package may have drastic breaking changes with no migration guides.
 
-## Features
+# Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+## View-Controller architecture with helper classes
+* `BdayaLoggableMixin`: provides a unique `logger`
+* `BdayaLifeCycleMixin`: provides life cycle management for controllers using
+  * `beforeRender`: same as `initState` for stateful widgets
+  * `afterRender`: gets called after a single frame has been rendered, which is useful for accessing states in `GlobalKey`s
+  * `onDispose`: same as `dispose` for stateful widgets
+* `BdayaIsLoadingMixin`: exposes reactive `isLoading` 
+* `BdayaStreamHandlerMixin`: useful for managing `Stream` and `Listenable` subscriptions
+## Hooks using `flutter_hooks` 
+* `useViewController`: registers a `lazySingleton` controller, and if it uses `BdayaLifeCycleMixin`, fires the related events
+## Routing helpers using `go_router`
+* `RouterListenableMixin` listens to `GoRouter` for changes to the current route, and notifies the controller about them
 
-## Getting started
+## Combined controllers for all of the above
+* `BdayaCombinedController` suitable for any widget, mixes 
+  1. `BdayaLoggableMixin`
+  2. `BdayaLifeCycleMixin`
+  3. `BdayaIsLoadingMixin`
+  4. `BdayaStreamHandlerMixin`
+* `BdayaCombinedRouteController` suitable for routable pages, mixes
+  1. `BdayaCombinedController`
+  2. `RouterListenableMixin`
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
+## Localization helpers
+* `ReactiveLocalizedFormField` which operates on a `FormControl<LocalizedStr>` to support multi-formfield inputs of localization
+* 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
-```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+Check the `/example` folder for a complete example of the architecture we use
