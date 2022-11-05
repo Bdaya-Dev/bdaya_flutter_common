@@ -1,7 +1,7 @@
 import 'package:example/common.dart';
 
-@LazySingleton(as: AppThemeServiceBase)
-class RemoteAppThemeService extends AppThemeServiceBase {
+@LazySingleton(as: BdayaAppThemeServiceBase)
+class RemoteAppThemeService extends BdayaAppThemeServiceBase {
   @override
   Future<void> init() async {
     logger.fine('Initializing ...');

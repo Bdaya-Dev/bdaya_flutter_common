@@ -1,4 +1,4 @@
-![bdaya-dev.com](doc/media/logo.jpg) [![pub package](https://img.shields.io/pub/v/bdaya_flutter_common.svg?style=for-the-badge)](https://pub.dartlang.org/packages/bdaya_flutter_common) [![Github](https://img.shields.io/github/last-commit/Bdaya-Dev/bdaya_flutter_common)](https://github.com/Bdaya-Dev/bdaya_flutter_common)
+[![bdaya-dev.com](doc/media/logo.jpg)](https://bdaya-dev.com) [![pub package](https://img.shields.io/pub/v/bdaya_flutter_common.svg?style=for-the-badge)](https://pub.dartlang.org/packages/bdaya_flutter_common) [![Github](https://img.shields.io/github/last-commit/Bdaya-Dev/bdaya_flutter_common)](https://github.com/Bdaya-Dev/bdaya_flutter_common)
 
 
 

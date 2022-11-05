@@ -5,20 +5,20 @@ import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
 
 /// Injects GoRouterState into the route tree
-GoRouterState useRouterStateHook({
+GoRouterState useBdayaRouterStateHook({
   required GoRouterState routerState,
   List<Object?>? keys,
 }) {
   return use(
-    _RouterStateHook(
+    _BdayaRouterStateHook(
       routerState: routerState,
       keys: keys,
     ),
   );
 }
 
-class _RouterStateHook extends Hook<GoRouterState> {
-  const _RouterStateHook({
+class _BdayaRouterStateHook extends Hook<GoRouterState> {
+  const _BdayaRouterStateHook({
     required this.routerState,
     super.keys,
   });
@@ -27,19 +27,19 @@ class _RouterStateHook extends Hook<GoRouterState> {
 
   @override
   HookState<GoRouterState, Hook<GoRouterState>> createState() =>
-      __RouterStateHookState(
-        routerState: routerState,
-      );
+      __BdayaRouterStateHookState();
 }
 
-class __RouterStateHookState
-    extends HookState<GoRouterState, Hook<GoRouterState>> {
-  final GoRouterState routerState;
+class __BdayaRouterStateHookState
+    extends HookState<GoRouterState, _BdayaRouterStateHook> {
+  late GoRouterState routerState;
+
   final logger = Logger('Hooks.RouterState');
-  __RouterStateHookState({required this.routerState});
+
   @override
   void initHook() {
     super.initHook();
+    routerState = hook.routerState;
     logger.info(
       'registering router state with location: ${routerState.location}',
     );
@@ -47,6 +47,14 @@ class __RouterStateHookState
     final testState = GetIt.I<GoRouterState>();
     if (routerState != testState) {
       throw Exception('Incorrect replaced instance');
+    }
+  }
+
+  @override
+  void didUpdateHook(_BdayaRouterStateHook oldHook) {
+    super.didUpdateHook(oldHook);
+    if (oldHook.routerState != hook.routerState) {
+      routerState = hook.routerState;
     }
   }
 

@@ -36,7 +36,8 @@ _i1.GetIt $initGetIt(
   );
   final registerModule = _$RegisterModule();
   gh.lazySingleton<_i3.AppShellController>(() => _i3.AppShellController());
-  gh.lazySingleton<_i4.AppThemeServiceBase>(() => _i5.RemoteAppThemeService());
+  gh.lazySingleton<_i4.BdayaAppThemeServiceBase>(
+      () => _i5.RemoteAppThemeService());
   gh.lazySingleton<_i6.AuthController>(
       () => _i6.AuthController(get<_i4.AuthService>()));
   gh.lazySingleton<_i7.AuthService>(

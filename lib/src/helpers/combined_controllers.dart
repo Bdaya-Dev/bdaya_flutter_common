@@ -14,4 +14,4 @@ abstract class BdayaCombinedController
 
 /// For page controllers that require route information
 abstract class BdayaCombinedRouteController extends BdayaCombinedController
-    with RouterListenableMixin {}
+    with BdayaRouterListenableMixin {}

@@ -25,7 +25,8 @@ _i1.GetIt $initBdayaGetIt(
     environment,
     environmentFilter,
   );
-  gh.lazySingleton<_i3.AppThemeServiceBase>(() => _i3.LocalAppThemeService());
+  gh.lazySingleton<_i3.BdayaAppThemeServiceBase>(
+      () => _i3.BdayaLocalAppThemeService());
   gh.lazySingleton<_i4.GoRouterRefreshService>(
     () => _i4.GoRouterRefreshService(),
     dispose: (i) => i.dispose(),

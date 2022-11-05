@@ -8,7 +8,7 @@ class ExampleApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeService = getIt<AppThemeServiceBase>();
+    final themeService = getIt<BdayaAppThemeServiceBase>();
     final locale = themeService.locale.of(context);
     final themeMode = themeService.themeMode.of(context);
     return MaterialApp.router(

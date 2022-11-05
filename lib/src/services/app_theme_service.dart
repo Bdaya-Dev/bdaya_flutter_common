@@ -1,7 +1,7 @@
 import 'package:bdaya_flutter_common/bdaya_flutter_common.dart';
 import 'package:flutter/material.dart';
 
-abstract class AppThemeServiceBase with BdayaLoggableMixin {
+abstract class BdayaAppThemeServiceBase with BdayaLoggableMixin {
   final locale = SharedValue<Locale?>(
     value: null,
     key: 'locale',
@@ -43,8 +43,8 @@ abstract class AppThemeServiceBase with BdayaLoggableMixin {
 }
 
 /// Saves theme and locale locally via SharedPreference
-@LazySingleton(as: AppThemeServiceBase)
-class LocalAppThemeService extends AppThemeServiceBase {
+@LazySingleton(as: BdayaAppThemeServiceBase)
+class BdayaLocalAppThemeService extends BdayaAppThemeServiceBase {
   @override
   Future<void> init() async {
     logger.fine('Initializing ...');

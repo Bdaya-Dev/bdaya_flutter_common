@@ -18,6 +18,6 @@ class InitService {
   Future<void> _sequentialInit(BuildContext context) async {
     //init
     await getIt<AuthService>().init();
-    await getIt<AppThemeServiceBase>().init();
+    await getIt<BdayaAppThemeServiceBase>().init();
   }
 }

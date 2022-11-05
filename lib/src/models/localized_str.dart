@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:collection/collection.dart';
 
-class LocalizedStr {
+class BdayaLocalizedStr {
   static const kAr = 'ar';
   static const kEn = 'en';
 
@@ -27,12 +27,12 @@ class LocalizedStr {
     backingField[locale] = value;
   }
 
-  LocalizedStr.fromBackingField(
+  BdayaLocalizedStr.fromBackingField(
     Map<String, String?> backingField, {
     bool copy = false,
   }) : backingField = copy ? Map.of(backingField) : backingField;
 
-  LocalizedStr({
+  BdayaLocalizedStr({
     String? ar,
     String? en,
   }) : backingField = {
@@ -44,11 +44,11 @@ class LocalizedStr {
     return backingField;
   }
 
-  factory LocalizedStr.fromMap(
+  factory BdayaLocalizedStr.fromMap(
     Map<String, dynamic> map, {
     bool copy = true,
   }) {
-    return LocalizedStr.fromBackingField(
+    return BdayaLocalizedStr.fromBackingField(
       map.cast<String, String?>(),
       copy: copy,
     );
@@ -58,7 +58,7 @@ class LocalizedStr {
   String toString() => backingField.toString();
 }
 
-extension LocalizedStrExt on LocalizedStr {
+extension LocalizedStrExt on BdayaLocalizedStr {
   String? get firstNotNullValue =>
       backingField.values.firstWhereOrNull((element) => element != null);
 

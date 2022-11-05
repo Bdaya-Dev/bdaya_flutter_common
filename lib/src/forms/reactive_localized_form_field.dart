@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:collection/collection.dart';
 
-class LocalizedStrValueAccessor extends ControlValueAccessor<LocalizedStr,
+class LocalizedStrValueAccessor extends ControlValueAccessor<BdayaLocalizedStr,
     Map<String, TextEditingController>> {
   final cacheMap = <String, TextEditingController>{};
   @override
   Map<String, TextEditingController>? modelToViewValue(
-    LocalizedStr? modelValue,
+    BdayaLocalizedStr? modelValue,
   ) {
     final backingField = modelValue?.backingField;
     if (backingField == null) return null;
@@ -43,11 +43,11 @@ class LocalizedStrValueAccessor extends ControlValueAccessor<LocalizedStr,
   }
 
   @override
-  LocalizedStr? viewToModelValue(
+  BdayaLocalizedStr? viewToModelValue(
     Map<String, TextEditingController>? viewValue,
   ) {
     if (viewValue == null) return null;
-    return LocalizedStr.fromBackingField(
+    return BdayaLocalizedStr.fromBackingField(
       viewValue.map(
         (key, value) => MapEntry(
           key,
@@ -69,13 +69,13 @@ typedef TextFieldBuilderFunction = Widget Function(
   InputDecoration decoration,
 );
 
-class ReactiveLocalizedFormField extends ReactiveFormField<LocalizedStr,
+class ReactiveLocalizedFormField extends ReactiveFormField<BdayaLocalizedStr,
     Map<String, TextEditingController>> {
   ReactiveLocalizedFormField({
     String? formControlName,
-    FormControl<LocalizedStr>? formControl,
+    FormControl<BdayaLocalizedStr>? formControl,
     String? label,
-    ShowErrorsFunction<LocalizedStr>? showErrors,
+    ShowErrorsFunction<BdayaLocalizedStr>? showErrors,
     Map<String, ValidationMessageFunction>? validationMessages,
     List<String>? locales,
     Set<String>? rtlLocales,
@@ -85,7 +85,7 @@ class ReactiveLocalizedFormField extends ReactiveFormField<LocalizedStr,
     )
         parentBuilder,
     TextFieldBuilderFunction? textFieldBuilder,
-    ControlValueAccessor<LocalizedStr, Map<String, TextEditingController>>?
+    ControlValueAccessor<BdayaLocalizedStr, Map<String, TextEditingController>>?
         valueAccessor,
     Key? key,
   }) : super(
@@ -114,7 +114,7 @@ class ReactiveLocalizedFormField extends ReactiveFormField<LocalizedStr,
                 ?.supportedLocales
                 .map((e) => e.toLanguageTag())
                 .toList();
-            rtlLocales ??= LocalizedStr.rtlLocales;
+            rtlLocales ??= BdayaLocalizedStr.rtlLocales;
             final children = locales!.map((locale) {
               final fieldController = value[locale];
               final isRtl = rtlLocales!.any(locale.startsWith);
@@ -171,9 +171,9 @@ class ReactiveLocalizedFormField extends ReactiveFormField<LocalizedStr,
         );
 }
 
-class LocalizedStrRequiredValidator extends Validator<LocalizedStr> {
+class LocalizedStrRequiredValidator extends Validator<BdayaLocalizedStr> {
   @override
-  Map<String, dynamic>? validate(AbstractControl<LocalizedStr> control) {
+  Map<String, dynamic>? validate(AbstractControl<BdayaLocalizedStr> control) {
     final value = control.value;
     if (value == null) {
       return <String, dynamic>{ValidationMessage.required: true};

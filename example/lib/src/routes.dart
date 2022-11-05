@@ -50,7 +50,7 @@ List<RouteBase> appRoutesList(GoRouterRefreshService goRouterRefreshService) =>
                 name: AppRouteNames.kPublicHome,
                 builder: (context, state) => HookBuilder(
                   builder: (context) => PublicHomeView(
-                    controller: useViewController(),
+                    controller: useBdayaViewController(),
                   ),
                 ),
               ),
@@ -73,7 +73,8 @@ List<RouteBase> appRoutesList(GoRouterRefreshService goRouterRefreshService) =>
               }
             },
             builder: (context, state) => HookBuilder(
-              builder: (context) => AuthView(controller: useViewController()),
+              builder: (context) =>
+                  AuthView(controller: useBdayaViewController()),
             ),
           ),
 
@@ -83,7 +84,7 @@ List<RouteBase> appRoutesList(GoRouterRefreshService goRouterRefreshService) =>
             builder: (context, state, child) {
               return HookBuilder(
                 builder: (context) => DashboardShellView(
-                  controller: useViewController(),
+                  controller: useBdayaViewController(),
                   child: child,
                 ),
               );
@@ -93,7 +94,8 @@ List<RouteBase> appRoutesList(GoRouterRefreshService goRouterRefreshService) =>
                 path: '/dashboard',
                 name: AppRouteNames.kDashboardHome,
                 redirect: (context, state) {
-                  final router = GoRouter.of(context);
+                  // final router = GoRouter.of(context); this is not possible because GoRouter doesn't exist in this context
+                  final router = getIt<GoRouter>();
                   final authService = getIt<AuthService>();
                   final isAuthed = authService.isAuthed.$;
 
@@ -110,7 +112,7 @@ List<RouteBase> appRoutesList(GoRouterRefreshService goRouterRefreshService) =>
                 },
                 builder: (context, state) => HookBuilder(
                   builder: (context) => DashboardHomeView(
-                    controller: useViewController(),
+                    controller: useBdayaViewController(),
                   ),
                 ),
                 routes: [
@@ -119,7 +121,7 @@ List<RouteBase> appRoutesList(GoRouterRefreshService goRouterRefreshService) =>
                     name: AppRouteNames.kOrders,
                     builder: (context, state) => HookBuilder(
                       builder: (context) => OrdersView(
-                        controller: useViewController(),
+                        controller: useBdayaViewController(),
                       ),
                     ),
                     routes: [
@@ -130,7 +132,7 @@ List<RouteBase> appRoutesList(GoRouterRefreshService goRouterRefreshService) =>
                           return HookBuilder(
                             builder: (context) {
                               return OrderDetailsView(
-                                controller: useViewController(),
+                                controller: useBdayaViewController(),
                               );
                             },
                           );

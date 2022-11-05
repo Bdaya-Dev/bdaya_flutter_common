@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:get_it/get_it.dart';
@@ -5,20 +7,20 @@ import 'package:logging/logging.dart';
 
 import '../controller/controller_lifecycle.dart';
 
-TController useViewController<TController extends Object>({
+TController useBdayaViewController<TController extends Object>({
   String? instanceName,
   List<Object>? keys,
 }) =>
     use(
-      _ViewControllerHook<TController>(
+      _BdayaViewControllerHook<TController>(
         instanceName: instanceName,
         keys: keys,
       ),
     );
 
-class _ViewControllerHook<TController extends Object>
+class _BdayaViewControllerHook<TController extends Object>
     extends Hook<TController> {
-  const _ViewControllerHook({
+  const _BdayaViewControllerHook({
     required this.instanceName,
     required super.keys,
   });
@@ -26,18 +28,15 @@ class _ViewControllerHook<TController extends Object>
 
   @override
   HookState<TController, Hook<TController>> createState() =>
-      _ViewControllerHookState<TController>();
+      _BdayaViewControllerHookState<TController>();
 }
 
-class _ViewControllerHookState<TController extends Object>
-    extends HookState<TController, _ViewControllerHook<TController>> {
+class _BdayaViewControllerHookState<TController extends Object>
+    extends HookState<TController, _BdayaViewControllerHook<TController>> {
   late TController controller;
   final logger = Logger('Hooks.ViewController');
-
-  @override
-  void initHook() {
-    //init controller
-    controller = GetIt.I<TController>(instanceName: hook.instanceName);
+  void setControllerFromInstanceName(String? instanceName) {
+    controller = GetIt.I<TController>(instanceName: instanceName);
     if (controller is BdayaLifeCycleMixin) {
       final casted = controller as BdayaLifeCycleMixin;
       casted.beforeRender(context);
@@ -48,16 +47,34 @@ class _ViewControllerHookState<TController extends Object>
   }
 
   @override
+  void initHook() {
+    //init controller
+    setControllerFromInstanceName(hook.instanceName);
+  }
+
+  @override
+  void didUpdateHook(_BdayaViewControllerHook<TController> oldHook) async {
+    super.didUpdateHook(oldHook);
+    if (hook.instanceName != oldHook.instanceName) {
+      final d = _disposeCurrentController();
+      if (d is Future) {
+        d.then(
+          (value) =>
+              setState(() => setControllerFromInstanceName(hook.instanceName)),
+        );
+      }
+    }
+  }
+
+  @override
   TController build(BuildContext context) {
     return controller;
   }
 
-  @override
-  void dispose() async {
+  FutureOr<void> _disposeCurrentController() {
     if (GetIt.I.isRegistered<TController>(instance: controller)) {
-      await GetIt.I.resetLazySingleton<TController>(
+      return GetIt.I.resetLazySingleton<TController>(
         instance: controller,
-        instanceName: hook.instanceName,
         disposingFunction: (cont) {
           if (cont is BdayaLifeCycleMixin) {
             cont.onDispose(context);
@@ -66,4 +83,7 @@ class _ViewControllerHookState<TController extends Object>
       );
     }
   }
+
+  @override
+  FutureOr<void> dispose() => _disposeCurrentController();
 }
