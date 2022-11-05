@@ -1,10 +1,7 @@
 import 'package:bdaya_flutter_common/bdaya_flutter_common.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 // ignore: implementation_imports
 import 'package:go_router/src/match.dart';
-import '../controller/stream_handler_mixin.dart';
 import 'package:collection/collection.dart';
 
 typedef GoRouterRouteMatch = RouteMatch;

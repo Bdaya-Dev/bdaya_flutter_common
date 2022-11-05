@@ -29,7 +29,7 @@ class SplashScreen extends StatelessWidget {
 }
 
 class _LoadingSplashScreen extends StatelessWidget {
-  const _LoadingSplashScreen({super.key});
+  const _LoadingSplashScreen();
 
   @override
   Widget build(BuildContext context) {

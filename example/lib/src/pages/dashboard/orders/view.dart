@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:example/common.dart';
 import 'controller.dart';
 
@@ -31,7 +29,6 @@ class OrdersView extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              final r = Random();
               context.goNamed(
                 AppRouteNames.kOrderDetails,
                 params: {
