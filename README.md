@@ -1,4 +1,6 @@
-![bdaya-dev.com](doc/media/logo.jpg)
+![bdaya-dev.com](doc/media/logo.jpg) [![pub package](https://img.shields.io/pub/v/bdaya_flutter_common.svg?style=for-the-badge)](https://pub.dartlang.org/packages/bdaya_flutter_common) [![Github](https://img.shields.io/github/last-commit/Bdaya-Dev/bdaya_flutter_common)](https://github.com/Bdaya-Dev/bdaya_flutter_common)
+
+
 
 We made this library to combine and standarize the common code we use in our projects into a single package.
 
