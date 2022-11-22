@@ -7,14 +7,12 @@ class OrderDetailsController extends BdayaCombinedRouteController {
   final DashboardShellController dashboardShellController;
 
   late final orderId = SharedValue<String>(value: currentOrderId!);
-  late final queryParams =
-      SharedValue<Map<String, String>>(value: currentQueryParams);
+  late final queryParams = SharedValue<Map<String, String>>(value: currentQueryParams);
 
   OrderDetailsController(this.dashboardShellController);
 
-  String? get currentOrderId => currentConfiguration?.decodedParams[kOrderId];
-  Map<String, String> get currentQueryParams =>
-      currentConfiguration?.decodedParams ?? {};
+  String? get currentOrderId => currentConfiguration?.pathParameters[kOrderId];
+  Map<String, String> get currentQueryParams => currentConfiguration?.uri.queryParameters ?? {};
 
   @override
   void onRouteInformationChanged(GoRouterRouteMatch route) {
@@ -23,7 +21,7 @@ class OrderDetailsController extends BdayaCombinedRouteController {
     if (oid != null) {
       orderId.$ = oid;
     }
-    queryParams.$ = route.queryParams;
+    queryParams.$ = route.uri.queryParameters;
   }
 
   void onQueryParamsChanged(Map<String, String> newParams) {

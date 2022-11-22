@@ -1,6 +1,6 @@
 name: bdaya_flutter_common
 description: Base Library for Bdaya Development Projects
-version: 0.0.2
+version: 0.0.3
 repository: https://github.com/Bdaya-Dev/bdaya_flutter_common
 
 environment:
@@ -18,7 +18,7 @@ dependencies:
   bdaya_shared_value: ^3.1.3
   get_it: ^7.2.0
   flutter_hooks: ^0.18.5+1
-  go_router: ^5.1.3
+  go_router: ^5.2.0
   logging: ^1.1.0
   tuple: ^2.0.1
   rxdart: ^0.27.5
