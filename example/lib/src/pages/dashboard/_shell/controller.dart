@@ -15,13 +15,12 @@ class DashboardShellController extends BdayaCombinedController {
       ).join();
 
   Future<void> doLogout() async {
+    startLoading();
     try {
-      isLoading.$ = true;
       await authService.logout();
+      stopLoadingSuccess();
     } catch (e, st) {
-      logger.severe('Error while logging out', e, st);
-    } finally {
-      isLoading.$ = false;
+      stopLoadingError(e, st, logger, 'Error while logging out');
     }
   }
 }

@@ -9,23 +9,51 @@ class AuthView extends StatelessWidget {
   final AuthController controller;
   @override
   Widget build(BuildContext context) {
-    final isLoading = controller.isLoading.of(context);
-    final authState = controller.authService.isAuthed.of(context);
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text('Auth Screen'),
           const SizedBox(height: 8),
-          if (isLoading)
-            const CircularProgressIndicator()
-          else
-            ElevatedButton(
-              onPressed: authState ? controller.logout : controller.login,
-              child: Text(
-                authState ? 'Logout' : 'Login',
-              ),
-            ),
+          LoadableAreaWrapper.custom(
+            area: controller.defaultArea,
+            customBuilder: (context, area) {
+              final authState = controller.authService.isAuthed.of(context);
+              final rawError = area.error;
+              String? error = rawError == null
+                  ? null
+                  : rawError is Exception //custom handling
+                      ? rawError.toString()
+                      : null;
+              return Column(
+                children: [
+                  if (error != null) ...[
+                    Text(error),
+                    const SizedBox(height: 2),
+                  ],
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ElevatedButton(
+                        onPressed: area.isLoading
+                            ? null
+                            : authState
+                                ? controller.logout
+                                : controller.login,
+                        child: Text(
+                          authState ? 'Logout' : 'Login',
+                        ),
+                      ),
+                      if (area.isLoading) ...[
+                        const CircularProgressIndicator(),
+                        const SizedBox(width: 8),
+                      ],
+                    ],
+                  )
+                ],
+              );
+            },
+          ),
         ],
       ),
     );

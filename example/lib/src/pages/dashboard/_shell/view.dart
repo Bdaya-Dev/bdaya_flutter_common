@@ -12,7 +12,6 @@ class DashboardShellView extends StatelessWidget {
   final Widget child;
   @override
   Widget build(BuildContext context) {
-    final isLoading = controller.isLoading.of(context);
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -29,13 +28,13 @@ class DashboardShellView extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              if (isLoading)
-                const CircularProgressIndicator()
-              else
-                ElevatedButton(
+              LoadableAreaWrapper(
+                area: controller.defaultArea,
+                builder: (context) => ElevatedButton(
                   onPressed: controller.doLogout,
                   child: const Text("Logout"),
                 ),
+              ),
             ],
           ),
           Expanded(child: child),

@@ -7,22 +7,22 @@ class AuthController extends BdayaCombinedController {
   AuthController(this.authService);
 
   Future<void> login() async {
-    isLoading.$ = true;
+    startLoading();
     try {
       await authService.login();
+      stopLoadingSuccess();
     } catch (e, st) {
-      logger.severe("Error occured while logging in", e, st);
-      isLoading.$ = false;
+      stopLoadingError(e, st, logger, "Error occured while logging in");
     }
   }
 
   Future<void> logout() async {
-    isLoading.$ = true;
+    startLoading();
     try {
       await authService.logout();
+      stopLoadingSuccess();
     } catch (e, st) {
-      logger.severe("Error occured while logging out", e, st);
-      isLoading.$ = false;
+      stopLoadingError(e, st, logger, "Error occured while logging out");
     }
   }
 }
