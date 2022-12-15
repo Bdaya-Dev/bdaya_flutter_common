@@ -18,8 +18,7 @@ TController useBdayaViewController<TController extends Object>({
       ),
     );
 
-class _BdayaViewControllerHook<TController extends Object>
-    extends Hook<TController> {
+class _BdayaViewControllerHook<TController extends Object> extends Hook<TController> {
   const _BdayaViewControllerHook({
     required this.instanceName,
     required super.keys,
@@ -27,12 +26,10 @@ class _BdayaViewControllerHook<TController extends Object>
   final String? instanceName;
 
   @override
-  HookState<TController, Hook<TController>> createState() =>
-      _BdayaViewControllerHookState<TController>();
+  HookState<TController, Hook<TController>> createState() => _BdayaViewControllerHookState<TController>();
 }
 
-class _BdayaViewControllerHookState<TController extends Object>
-    extends HookState<TController, _BdayaViewControllerHook<TController>> {
+class _BdayaViewControllerHookState<TController extends Object> extends HookState<TController, _BdayaViewControllerHook<TController>> {
   late TController controller;
   final logger = Logger('Hooks.ViewController');
   void setControllerFromInstanceName(String? instanceName) {
@@ -59,8 +56,7 @@ class _BdayaViewControllerHookState<TController extends Object>
       final d = _disposeCurrentController();
       if (d is Future) {
         d.then(
-          (value) =>
-              setState(() => setControllerFromInstanceName(hook.instanceName)),
+          (value) => setState(() => setControllerFromInstanceName(hook.instanceName)),
         );
       }
     }
@@ -68,6 +64,9 @@ class _BdayaViewControllerHookState<TController extends Object>
 
   @override
   TController build(BuildContext context) {
+    if (controller is BdayaLifeCycleMixin) {
+      (controller as BdayaLifeCycleMixin).beforeEachBuild(context);
+    }
     return controller;
   }
 

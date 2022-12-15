@@ -1,5 +1,9 @@
 ## 0.0.4 - 10/12/2022
 
+* Added `beforeEachBuild` to `BdayaLifeCycleMixin`
+
+## 0.0.4 - 10/12/2022
+
 * Added `BdayaLoadableArea` to `BdayaIsLoadingMixin`
 
 ## 0.0.3 - 05/11/2022

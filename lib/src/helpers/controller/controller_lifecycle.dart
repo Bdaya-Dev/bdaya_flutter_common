@@ -21,6 +21,8 @@ mixin BdayaLifeCycleMixin {
     }
   }
 
+  void beforeEachBuild(BuildContext context) {}
+
   /// Equal to [State.dispose]
   @mustCallSuper
   void onDispose(BuildContext context) {

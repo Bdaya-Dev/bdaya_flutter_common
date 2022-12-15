@@ -8,6 +8,10 @@ class DashboardShellController extends BdayaCombinedController {
   final random = Random();
 
   DashboardShellController(this.authService);
+  @override
+  void beforeEachBuild(BuildContext context) {
+    logger.finest('beforeEachRender');
+  }
 
   String generateRandomOrderId() => List.generate(
         16,
