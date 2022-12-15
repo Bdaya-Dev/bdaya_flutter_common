@@ -1,4 +1,4 @@
-## 0.0.4 - 10/12/2022
+## 0.0.5 - 15/12/2022
 
 * Added `beforeEachBuild` to `BdayaLifeCycleMixin`
 
