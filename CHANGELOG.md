@@ -1,3 +1,7 @@
+## 0.0.6 - 16/12/2022
+
+* Added `wrapWithArea` as an extension to `Future<T>` and `Stream<T>`
+
 ## 0.0.5 - 15/12/2022
 
 * Added `beforeEachBuild` to `BdayaLifeCycleMixin`

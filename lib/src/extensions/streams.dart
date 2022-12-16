@@ -15,3 +15,19 @@ extension LogStreamsExt<T> on Stream<T> {
     );
   }
 }
+
+extension LogFutureExt<T> on Future<T> {
+  Future<T> wrapWithArea(BdayaRxLoadableArea area, [Logger? logger, String? message]) async {
+    try {
+      area.startLoading();
+      logger?.finest('[${area.$.displayName}] Started loading');
+      final res = await this;
+      area.stopLoadingSuccess();
+      logger?.finest('[${area.$.displayName}] Stopped loading successfully');
+      return res;
+    } catch (e, st) {
+      area.stopLoadingError(e, st, logger, message);
+      rethrow;
+    }
+  }
+}
