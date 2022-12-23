@@ -9,7 +9,7 @@ void main() {
   Logger.root.level = Level.ALL;
   Logger.root.onRecord.listen(bdayaOnRecordHandler);
   setPathUrlStrategy();
-  configureBdayaDependencies(getIt);
+  getIt.allowReassignment = true;
   configureDependencies();
   runApp(SharedValue.wrapApp(const ExampleApp()));
 }
