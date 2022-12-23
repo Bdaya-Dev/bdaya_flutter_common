@@ -1,3 +1,7 @@
+## 1.0.0 - 23/12/2022
+
+* Breaking change to go_router v6.0.0 and injectable v2.1.0
+
 ## 0.0.6 - 16/12/2022
 
 * Added `wrapWithArea` as an extension to `Future<T>` and `Stream<T>`
