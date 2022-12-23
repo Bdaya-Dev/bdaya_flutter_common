@@ -1,6 +1,6 @@
 name: bdaya_flutter_common
 description: Base Library for Bdaya Development Projects
-version: 0.0.6
+version: 1.0.0
 repository: https://github.com/Bdaya-Dev/bdaya_flutter_common
 
 environment:
