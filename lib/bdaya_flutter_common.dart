@@ -18,4 +18,6 @@ export 'src/services/_exports.dart';
 export 'src/forms/_exports.dart';
 export 'src/models/_exports.dart';
 export 'src/widgets/_exports.dart';
+
 export 'src/get_it_config.dart';
+export 'src/get_it_config.module.dart';
