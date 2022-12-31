@@ -15,7 +15,7 @@ class AuthView extends StatelessWidget {
         children: [
           const Text('Auth Screen'),
           const SizedBox(height: 8),
-          LoadableAreaWrapper.custom(
+          BdayaLoadableAreaWrapper.custom(
             area: controller.defaultArea,
             customBuilder: (context, area) {
               final authState = controller.authService.isAuthed.of(context);

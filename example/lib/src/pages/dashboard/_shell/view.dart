@@ -28,7 +28,7 @@ class DashboardShellView extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              LoadableAreaWrapper(
+              BdayaLoadableAreaWrapper(
                 area: controller.defaultArea,
                 builder: (context) => ElevatedButton(
                   onPressed: controller.doLogout,
