@@ -1,3 +1,7 @@
+## 2.0.0 - 31/12/2022
+
+* Breaking changes
+
 ## 1.0.0 - 23/12/2022
 
 * Breaking change to go_router v6.0.0 and injectable v2.1.0
