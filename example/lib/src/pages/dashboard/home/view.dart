@@ -18,6 +18,10 @@ class DashboardHomeView extends StatelessWidget {
           onPressed: () => context.goNamed(AppRouteNames.kOrders),
           child: const Text('Go to orders'),
         ),
+        ElevatedButton(
+          onPressed: () => context.goNamed(AppRouteNames.kUsers),
+          child: const Text('Go to Users'),
+        ),
       ],
     );
   }

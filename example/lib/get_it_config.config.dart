@@ -6,14 +6,17 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:example/common.dart' as _i3;
-import 'package:example/injectable_module.dart' as _i14;
+import 'package:example/injectable_module.dart' as _i16;
 import 'package:example/src/pages/_shell/controller.dart' as _i4;
-import 'package:example/src/pages/auth/auth_controller.dart' as _i13;
+import 'package:example/src/pages/auth/auth_controller.dart' as _i15;
 import 'package:example/src/pages/dashboard/_shell/controller.dart' as _i8;
 import 'package:example/src/pages/dashboard/home/controller.dart' as _i7;
 import 'package:example/src/pages/dashboard/order_details/controller.dart'
     as _i10;
 import 'package:example/src/pages/dashboard/orders/controller.dart' as _i11;
+import 'package:example/src/pages/dashboard/user_details/controller.dart'
+    as _i13;
+import 'package:example/src/pages/dashboard/users/controller.dart' as _i14;
 import 'package:example/src/pages/public/home/controller.dart' as _i12;
 import 'package:example/src/services/auth_service.dart' as _i5;
 import 'package:example/src/services/init_service.dart' as _i9;
@@ -54,10 +57,20 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i11.OrdersController(gh<_i8.DashboardShellController>()));
     gh.lazySingleton<_i12.PublicHomeController>(
         () => _i12.PublicHomeController());
-    gh.lazySingleton<_i13.AuthController>(
-        () => _i13.AuthController(gh<_i3.AuthService>()));
+    gh.factoryParam<_i13.UserDetailsController, String, dynamic>((
+      userId,
+      _,
+    ) =>
+        _i13.UserDetailsController(
+          gh<_i8.DashboardShellController>(),
+          userId,
+        ));
+    gh.lazySingleton<_i14.UsersController>(
+        () => _i14.UsersController(gh<_i8.DashboardShellController>()));
+    gh.lazySingleton<_i15.AuthController>(
+        () => _i15.AuthController(gh<_i3.AuthService>()));
     return this;
   }
 }
 
-class _$RegisterModule extends _i14.RegisterModule {}
+class _$RegisterModule extends _i16.RegisterModule {}

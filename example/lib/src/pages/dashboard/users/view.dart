@@ -1,20 +1,20 @@
 import 'package:example/common.dart';
 import 'controller.dart';
 
-class OrdersView extends StatelessWidget {
-  const OrdersView({
+class UsersView extends StatelessWidget {
+  const UsersView({
     super.key,
     required this.controller,
   });
 
-  final OrdersController controller;
+  final UsersController controller;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          const Text('Orders View'),
+          const Text('Users View'),
           ElevatedButton(
             child: const Text('Go to public home'),
             onPressed: () {
@@ -30,13 +30,13 @@ class OrdersView extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               context.goNamed(
-                AppRouteNames.kOrderDetails,
+                AppRouteNames.kUserDetails,
                 params: {
-                  kOrderId: controller.dashboardShellController.generateRandomId(),
+                  kUserId: controller.dashboardShellController.generateRandomId(),
                 },
               );
             },
-            child: const Text('Go to sample order'),
+            child: const Text('Go to sample user'),
           ),
         ],
       ),

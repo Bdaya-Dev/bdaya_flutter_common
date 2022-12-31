@@ -2,6 +2,7 @@ import 'package:example/common.dart';
 
 import '../_shell/controller.dart';
 
+// @injectable
 @lazySingleton
 class OrderDetailsController extends BdayaCombinedRouteController {
   final DashboardShellController dashboardShellController;
@@ -11,8 +12,8 @@ class OrderDetailsController extends BdayaCombinedRouteController {
 
   OrderDetailsController(this.dashboardShellController);
 
-  String? get currentOrderId => currentConfiguration?.pathParameters[kOrderId];
-  Map<String, String> get currentQueryParams => currentConfiguration?.uri.queryParameters ?? {};
+  String? get currentOrderId => currentConfiguration.pathParameters[kOrderId];
+  Map<String, String> get currentQueryParams => currentConfiguration.uri.queryParameters;
 
   @override
   void onRouteInformationChanged(GoRouterRouteMatch route) {
@@ -20,8 +21,8 @@ class OrderDetailsController extends BdayaCombinedRouteController {
     final oid = currentOrderId;
     if (oid != null) {
       orderId.$ = oid;
+      queryParams.$ = route.uri.queryParameters;
     }
-    queryParams.$ = route.uri.queryParameters;
   }
 
   void onQueryParamsChanged(Map<String, String> newParams) {

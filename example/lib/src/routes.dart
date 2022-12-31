@@ -5,6 +5,8 @@ import 'pages/dashboard/_shell/view.dart';
 import 'pages/dashboard/home/view.dart';
 import 'pages/dashboard/order_details/view.dart';
 import 'pages/dashboard/orders/view.dart';
+import 'pages/dashboard/user_details/view.dart';
+import 'pages/dashboard/users/view.dart';
 import 'pages/public/home/view.dart';
 
 final appShellNavigatorKey = GlobalKey<NavigatorState>(
@@ -19,6 +21,7 @@ final publicShellNavigatorKey = GlobalKey<NavigatorState>(
 
 const kReturnTo = 'returnTo';
 const kOrderId = 'orderId';
+const kUserId = 'userId';
 
 class AppRouteNames {
   static const initialRoute = '/';
@@ -28,10 +31,11 @@ class AppRouteNames {
   static const kDashboardHome = 'dashboard_home';
   static const kOrders = 'orders';
   static const kOrderDetails = 'order_details';
+  static const kUsers = 'users';
+  static const kUserDetails = 'user_details';
 }
 
-List<RouteBase> appRoutesList(GoRouterRefreshService goRouterRefreshService) =>
-    [
+List<RouteBase> appRoutesList(GoRouterRefreshService goRouterRefreshService) => [
       ShellRoute(
         navigatorKey: appShellNavigatorKey,
         builder: (context, state, child) => HookBuilder(
@@ -65,16 +69,14 @@ List<RouteBase> appRoutesList(GoRouterRefreshService goRouterRefreshService) =>
               final goRouter = getIt<GoRouter>();
               final isAuthed = authService.isAuthed.$;
               if (isAuthed) {
-                final targetUri = state.queryParams[kReturnTo] ??
-                    goRouter.namedLocation(AppRouteNames.kDashboardHome);
+                final targetUri = state.queryParams[kReturnTo] ?? goRouter.namedLocation(AppRouteNames.kDashboardHome);
                 return targetUri;
               } else {
                 return null;
               }
             },
             builder: (context, state) => HookBuilder(
-              builder: (context) =>
-                  AuthView(controller: useBdayaViewController()),
+              builder: (context) => AuthView(controller: useBdayaViewController()),
             ),
           ),
 
@@ -132,11 +134,41 @@ List<RouteBase> appRoutesList(GoRouterRefreshService goRouterRefreshService) =>
                           return HookBuilder(
                             builder: (context) {
                               return OrderDetailsView(
-                                controller: useBdayaViewController(),
+                                controller: useBdayaViewController(
+                                    // hookMode: BdayaGetItHookMode.factory,
+                                    ////using keys with lazySingleton will cause unexpected behavior
+                                    // keys: [
+                                    //   state.params[kOrderId],
+                                    // ],
+
+                                    ),
                               );
                             },
                           );
                         },
+                      ),
+                    ],
+                  ),
+                  GoRoute(
+                    path: 'users',
+                    name: AppRouteNames.kUsers,
+                    builder: (context, state) => HookBuilder(
+                      builder: (context) => UsersView(
+                        controller: useBdayaViewController(),
+                      ),
+                    ),
+                    routes: [
+                      GoRoute(
+                        path: ':$kUserId',
+                        name: AppRouteNames.kUserDetails,
+                        builder: (context, state) => HookBuilder(
+                          builder: (context) => UserDetailsView(
+                            controller: useBdayaViewController(
+                              hookMode: BdayaGetItHookMode.factory,
+                              param1: state.params[kUserId],
+                            )..queryParams.$ = state.queryParams,
+                          ),
+                        ),
                       ),
                     ],
                   ),

@@ -8,7 +8,7 @@ typedef GoRouterRouteMatch = RouteMatchList;
 mixin BdayaRouterListenableMixin on BdayaStreamHandlerMixin {
   /// gets called every time the RouteInformation changes,
   void onRouteInformationChanged(GoRouterRouteMatch route);
-  GoRouterRouteMatch? get currentConfiguration => goRouter.routerDelegate.currentConfiguration;
+  GoRouterRouteMatch get currentConfiguration => goRouter.routerDelegate.currentConfiguration;
   bool get callOnRouteChangedInitially => true;
   void _onRouteInformationChanged() {
     //goRouter.uri;

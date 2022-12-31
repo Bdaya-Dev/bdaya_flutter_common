@@ -29,11 +29,11 @@ mixin BdayaStreamHandlerMixin on BdayaLifeCycleMixin {
 
   @override
   void onDispose(BuildContext context) {
-    for (var element in _subs) {
-      element.cancel();
-    }
     for (var element in _listenables) {
       element.item1.removeListener(element.item2);
+    }
+    for (var element in _subs) {
+      element.cancel();
     }
     _listenables.clear();
     _subs.clear();

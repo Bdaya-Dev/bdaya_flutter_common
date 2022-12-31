@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/widgets.dart';
 import 'loggable_mixin.dart';
 
@@ -25,7 +27,7 @@ mixin BdayaLifeCycleMixin {
 
   /// Equal to [State.dispose]
   @mustCallSuper
-  void onDispose(BuildContext context) {
+  FutureOr<void> onDispose(BuildContext context) {
     if (this is BdayaLoggableMixin) {
       (this as BdayaLoggableMixin).logger.finer('onDispose');
     }

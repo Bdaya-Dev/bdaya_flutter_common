@@ -13,7 +13,7 @@ class DashboardShellController extends BdayaCombinedController {
     logger.finest('beforeEachRender');
   }
 
-  String generateRandomOrderId() => List.generate(
+  String generateRandomId() => List.generate(
         16,
         (index) => (random.nextInt(9) + 1).toString(),
       ).join();
