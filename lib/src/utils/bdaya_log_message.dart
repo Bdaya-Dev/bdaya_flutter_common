@@ -1,5 +1,6 @@
 import 'package:ansicolor/ansicolor.dart';
 import 'package:flutter/foundation.dart';
+import 'package:intl/intl.dart';
 import 'package:logging/logging.dart';
 export 'package:ansicolor/ansicolor.dart';
 
@@ -9,23 +10,38 @@ void setAnsiColors(bool isEnabled) {
 
 final errorPen = AnsiPen()..red();
 final infoPen = AnsiPen()..white();
-void bdayaOnRecordHandler(LogRecord record) {
-  AnsiPen? pen;
-  final levelValue = record.level;
-  var msg =
-      '[${record.sequenceNumber}][${record.level.name}] [${record.loggerName}] ${record.time} : ${record.message}';
-  final err = record.error;
-  final st = record.stackTrace;
-  if (err != null) {
-    msg += '\n$err';
-  }
-  if (st != null) {
-    msg += '\n$st';
-  }
 
-  if (levelValue > Level.SEVERE) {
-    pen = errorPen; //severe or shout => red
-  } else {}
+void Function(LogRecord record) bdayaOnRecordHandlerFactory({
+  bool showSequenceNumber = true,
+  bool showLevel = true,
+  bool showLoggerName = true,
+  bool showTime = true,
+  bool showError = true,
+  bool showStackTrace = true,
+}) {
+  return (record) {
+    AnsiPen? pen;
+    final levelValue = record.level;
+    final seqStr = showSequenceNumber ? '[${record.sequenceNumber}]' : '';
+    final levelStr = showLevel ? '[${record.level.name}]' : '';
+    final loggerNameStr = showLoggerName ? '[${record.loggerName}]' : '';
 
-  debugPrint(pen?.write(msg) ?? msg);
+    final timeStr = showTime ? '[${record.time.toIso8601String()}]' : '';
+
+    var msg = '$seqStr$levelStr$loggerNameStr$timeStr : ${record.message}';
+    final err = record.error;
+    final st = record.stackTrace;
+    if (showError && err != null) {
+      msg += '\n$err';
+    }
+    if (showStackTrace && st != null) {
+      msg += '\n$st';
+    }
+
+    if (levelValue > Level.SEVERE) {
+      pen = errorPen; //severe or shout => red
+    } else {}
+
+    debugPrint(pen?.write(msg) ?? msg);
+  };
 }
