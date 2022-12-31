@@ -7,7 +7,12 @@ import 'src/app.dart';
 
 void main() {
   Logger.root.level = Level.ALL;
-  Logger.root.onRecord.listen(bdayaOnRecordHandler);
+  Logger.root.onRecord.listen(
+    bdayaOnRecordHandlerFactory(
+      showSequenceNumber: false,
+      showTime: false,
+    ),
+  );
   setPathUrlStrategy();
   getIt.allowReassignment = true;
   configureDependencies();
