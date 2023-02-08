@@ -1,3 +1,10 @@
+## 3.0.0 - 09/02/2022
+
+* [Breaking] rename `LocalizedStrValueAccessor` to `BdayaLocalizedStrValueAccessor`
+* [Breaking] rename `ReactiveLocalizedFormField` to `BdayaReactiveLocalizedFormField`
+* [Breaking] rename `BdayaStreamHandlerMixin` to `BdayaDisposeHandlerMixin`
+* [Breaking] rename `StreamToListenable` to `BdayaStreamToListenable`
+
 ## 2.0.0 - 31/12/2022
 
 * Breaking changes

@@ -5,9 +5,14 @@ import 'package:tuple/tuple.dart';
 
 import 'controller_lifecycle.dart';
 
-mixin BdayaStreamHandlerMixin on BdayaLifeCycleMixin {
+mixin BdayaDisposeHandlerMixin on BdayaLifeCycleMixin {
   final _subs = <StreamSubscription>[];
   final _listenables = <Tuple2<Listenable, VoidCallback>>[];
+  final _actions = <VoidCallback>[];
+
+  void registerDisposableAction(VoidCallback dispose) {
+    _actions.add(dispose);
+  }
 
   void registerStream(StreamSubscription subscription) {
     _subs.add(subscription);
@@ -32,11 +37,16 @@ mixin BdayaStreamHandlerMixin on BdayaLifeCycleMixin {
     for (var element in _listenables) {
       element.item1.removeListener(element.item2);
     }
+    for (var element in _actions) {
+      element();
+    }
     for (var element in _subs) {
       element.cancel();
     }
+
     _listenables.clear();
     _subs.clear();
+    _actions.clear();
     super.onDispose(context);
   }
 }

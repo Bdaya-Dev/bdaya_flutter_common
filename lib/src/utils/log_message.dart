@@ -1,6 +1,5 @@
 import 'package:ansicolor/ansicolor.dart';
 import 'package:flutter/foundation.dart';
-import 'package:intl/intl.dart';
 import 'package:logging/logging.dart';
 export 'package:ansicolor/ansicolor.dart';
 

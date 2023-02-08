@@ -5,7 +5,7 @@ import 'package:go_router/src/matching.dart';
 import 'package:collection/collection.dart';
 
 typedef GoRouterRouteMatch = RouteMatchList;
-mixin BdayaRouterListenableMixin on BdayaStreamHandlerMixin {
+mixin BdayaRouterListenableMixin on BdayaDisposeHandlerMixin {
   /// gets called every time the RouteInformation changes,
   void onRouteInformationChanged(GoRouterRouteMatch route);
   GoRouterRouteMatch get currentConfiguration => goRouter.routerDelegate.currentConfiguration;

@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 
-class StreamToListenable extends ChangeNotifier {
-  StreamToListenable(Stream<dynamic> stream) {
+class BdayaStreamToListenable extends ChangeNotifier {
+  BdayaStreamToListenable(Stream<dynamic> stream) {
     notifyListeners();
     _subscription = stream.asBroadcastStream().listen(
           (_) => notifyListeners(),
@@ -20,5 +20,5 @@ class StreamToListenable extends ChangeNotifier {
 }
 
 extension StreamToListenableExt on Stream {
-  StreamToListenable toListenable() => StreamToListenable(this);
+  BdayaStreamToListenable toListenable() => BdayaStreamToListenable(this);
 }
