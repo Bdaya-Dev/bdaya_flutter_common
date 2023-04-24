@@ -31,7 +31,8 @@ class OrderDetailsView extends StatelessWidget {
           const SizedBox(height: 8),
           ElevatedButton(
             onPressed: () {
-              final newId = controller.dashboardShellController.generateRandomId();
+              final newId =
+                  controller.dashboardShellController.generateRandomId();
               context.goNamed(
                 AppRouteNames.kOrderDetails,
                 params: {
@@ -40,7 +41,8 @@ class OrderDetailsView extends StatelessWidget {
                 extra: newId,
               );
             },
-            child: const Text("Go to another random order (same route navigation)"),
+            child: const Text(
+                "Go to another random order (same route navigation)"),
           ),
           const SizedBox(height: 8),
           ElevatedButton(

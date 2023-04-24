@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:collection/collection.dart';
 
-class BdayaLocalizedStrValueAccessor extends ControlValueAccessor<BdayaLocalizedStr, Map<String, TextEditingController>> {
+class BdayaLocalizedStrValueAccessor extends ControlValueAccessor<
+    BdayaLocalizedStr, Map<String, TextEditingController>> {
   final cacheMap = <String, TextEditingController>{};
   @override
   Map<String, TextEditingController>? modelToViewValue(
@@ -68,7 +69,8 @@ typedef BdayaTextFieldBuilderFunction = Widget Function(
   InputDecoration decoration,
 );
 
-class BdayaReactiveLocalizedFormField extends ReactiveFormField<BdayaLocalizedStr, Map<String, TextEditingController>> {
+class BdayaReactiveLocalizedFormField extends ReactiveFormField<
+    BdayaLocalizedStr, Map<String, TextEditingController>> {
   BdayaReactiveLocalizedFormField({
     String? formControlName,
     FormControl<BdayaLocalizedStr>? formControl,
@@ -83,7 +85,8 @@ class BdayaReactiveLocalizedFormField extends ReactiveFormField<BdayaLocalizedSt
     )
         parentBuilder,
     BdayaTextFieldBuilderFunction? textFieldBuilder,
-    ControlValueAccessor<BdayaLocalizedStr, Map<String, TextEditingController>>? valueAccessor,
+    ControlValueAccessor<BdayaLocalizedStr, Map<String, TextEditingController>>?
+        valueAccessor,
     Key? key,
   }) : super(
           formControl: formControl,
@@ -106,14 +109,20 @@ class BdayaReactiveLocalizedFormField extends ReactiveFormField<BdayaLocalizedSt
                 }
               }
             }
-            locales ??= field.context.findAncestorWidgetOfExactType<WidgetsApp>()?.supportedLocales.map((e) => e.toLanguageTag()).toList();
+            locales ??= field.context
+                .findAncestorWidgetOfExactType<WidgetsApp>()
+                ?.supportedLocales
+                .map((e) => e.toLanguageTag())
+                .toList();
             rtlLocales ??= BdayaLocalizedStr.rtlLocales;
             final children = locales!.map((locale) {
               final fieldController = value[locale];
               final isRtl = rtlLocales!.any(locale.startsWith);
-              final textDirection = isRtl ? TextDirection.rtl : TextDirection.ltr;
+              final textDirection =
+                  isRtl ? TextDirection.rtl : TextDirection.ltr;
               void onChanged(String newValue) {
-                final changedController = value[locale] ?? TextEditingController(text: newValue);
+                final changedController =
+                    value[locale] ?? TextEditingController(text: newValue);
                 final newMap = Map.of(value);
                 newMap[locale] = changedController;
                 field.control.markAsTouched();
@@ -124,14 +133,20 @@ class BdayaReactiveLocalizedFormField extends ReactiveFormField<BdayaLocalizedSt
 
 // field.control.errors
               // field.errorText;
-              final messages = field.widget.validationMessages ?? ReactiveFormConfig.of(field.context)?.validationMessages ?? {};
+              final messages = field.widget.validationMessages ??
+                  ReactiveFormConfig.of(field.context)?.validationMessages ??
+                  {};
               final errorsForCurrentLocale = errorsPerLocale[locale];
               final error = errorsForCurrentLocale?.firstOrNull;
-              final errorText = error != null ? messages[error]?.call(locale) ?? error : null;
+              final errorText =
+                  error != null ? messages[error]?.call(locale) ?? error : null;
 
               final defaultDecoration = InputDecoration(
                 labelText: '$label [$locale]',
-                errorText: (field.widget.showErrors?.call(field.control) ?? (field.control.invalid && field.control.touched)) ? errorText : null,
+                errorText: (field.widget.showErrors?.call(field.control) ??
+                        (field.control.invalid && field.control.touched))
+                    ? errorText
+                    : null,
               ).applyDefaults(Theme.of(field.context).inputDecorationTheme);
               return Directionality(
                 textDirection: textDirection,

@@ -35,7 +35,8 @@ class AppRouteNames {
   static const kUserDetails = 'user_details';
 }
 
-List<RouteBase> appRoutesList(GoRouterRefreshService goRouterRefreshService) => [
+List<RouteBase> appRoutesList(GoRouterRefreshService goRouterRefreshService) =>
+    [
       ShellRoute(
         navigatorKey: appShellNavigatorKey,
         builder: (context, state, child) => HookBuilder(
@@ -69,14 +70,16 @@ List<RouteBase> appRoutesList(GoRouterRefreshService goRouterRefreshService) => 
               final goRouter = getIt<GoRouter>();
               final isAuthed = authService.isAuthed.$;
               if (isAuthed) {
-                final targetUri = state.queryParams[kReturnTo] ?? goRouter.namedLocation(AppRouteNames.kDashboardHome);
+                final targetUri = state.queryParams[kReturnTo] ??
+                    goRouter.namedLocation(AppRouteNames.kDashboardHome);
                 return targetUri;
               } else {
                 return null;
               }
             },
             builder: (context, state) => HookBuilder(
-              builder: (context) => AuthView(controller: useBdayaViewController()),
+              builder: (context) =>
+                  AuthView(controller: useBdayaViewController()),
             ),
           ),
 

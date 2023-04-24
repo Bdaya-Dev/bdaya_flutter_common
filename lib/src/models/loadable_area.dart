@@ -33,11 +33,18 @@ class BdayaLoadableArea {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is BdayaLoadableArea && other.isLoading == isLoading && other.displayName == displayName && other.error == error && other.st == st;
+    return other is BdayaLoadableArea &&
+        other.isLoading == isLoading &&
+        other.displayName == displayName &&
+        other.error == error &&
+        other.st == st;
   }
 
   @override
   int get hashCode {
-    return isLoading.hashCode ^ displayName.hashCode ^ error.hashCode ^ st.hashCode;
+    return isLoading.hashCode ^
+        displayName.hashCode ^
+        error.hashCode ^
+        st.hashCode;
   }
 }

@@ -2,13 +2,13 @@ import 'package:bdaya_flutter_common/bdaya_flutter_common.dart';
 import 'package:flutter/widgets.dart';
 // ignore: implementation_imports
 import 'package:go_router/src/matching.dart';
-import 'package:collection/collection.dart';
 
 typedef GoRouterRouteMatch = RouteMatchList;
 mixin BdayaRouterListenableMixin on BdayaDisposeHandlerMixin {
   /// gets called every time the RouteInformation changes,
   void onRouteInformationChanged(GoRouterRouteMatch route);
-  GoRouterRouteMatch get currentConfiguration => goRouter.routerDelegate.currentConfiguration;
+  GoRouterRouteMatch get currentConfiguration =>
+      goRouter.routerDelegate.currentConfiguration;
   bool get callOnRouteChangedInitially => true;
   void _onRouteInformationChanged() {
     //goRouter.uri;

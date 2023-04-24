@@ -32,7 +32,8 @@ class UsersView extends StatelessWidget {
               context.goNamed(
                 AppRouteNames.kUserDetails,
                 params: {
-                  kUserId: controller.dashboardShellController.generateRandomId(),
+                  kUserId:
+                      controller.dashboardShellController.generateRandomId(),
                 },
               );
             },

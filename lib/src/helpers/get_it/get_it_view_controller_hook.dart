@@ -26,7 +26,8 @@ TController useBdayaViewController<TController extends Object>({
       ),
     );
 
-class _BdayaViewControllerHook<TController extends Object> extends Hook<TController> {
+class _BdayaViewControllerHook<TController extends Object>
+    extends Hook<TController> {
   const _BdayaViewControllerHook({
     required this.instanceName,
     required super.keys,
@@ -40,10 +41,12 @@ class _BdayaViewControllerHook<TController extends Object> extends Hook<TControl
   final BdayaGetItHookMode hookMode;
 
   @override
-  HookState<TController, Hook<TController>> createState() => _BdayaViewControllerHookState<TController>();
+  HookState<TController, Hook<TController>> createState() =>
+      _BdayaViewControllerHookState<TController>();
 }
 
-class _BdayaViewControllerHookState<TController extends Object> extends HookState<TController, _BdayaViewControllerHook<TController>> {
+class _BdayaViewControllerHookState<TController extends Object>
+    extends HookState<TController, _BdayaViewControllerHook<TController>> {
   late TController controller;
   final logger = Logger('Hooks.ViewController');
   void setController() {
@@ -111,9 +114,11 @@ class _BdayaViewControllerHookState<TController extends Object> extends HookStat
             disposingFunction: disposeIfPossible,
           );
         } else {
-          final controllerName =
-              controller is BdayaLoggableMixin ? (controller as BdayaLoggableMixin).loggerName : bdayaDefaultLoggerName(controller);
-          logger.warning("dispose called on an instance that's not registered with GetIt ($controllerName)");
+          final controllerName = controller is BdayaLoggableMixin
+              ? (controller as BdayaLoggableMixin).loggerName
+              : bdayaDefaultLoggerName(controller);
+          logger.warning(
+              "dispose called on an instance that's not registered with GetIt ($controllerName)");
           return disposeIfPossible(controller);
         }
       case BdayaGetItHookMode.factory:
@@ -125,9 +130,11 @@ class _BdayaViewControllerHookState<TController extends Object> extends HookStat
             "Hook mode singleton doesn't make since it will be disposed once, consider making this a global service instead, or switch to lazySingleton/factory",
           );
         } else {
-          final controllerName =
-              controller is BdayaLoggableMixin ? (controller as BdayaLoggableMixin).loggerName : bdayaDefaultLoggerName(controller);
-          logger.warning("dispose called on an instance that's not registered with GetIt ($controllerName)");
+          final controllerName = controller is BdayaLoggableMixin
+              ? (controller as BdayaLoggableMixin).loggerName
+              : bdayaDefaultLoggerName(controller);
+          logger.warning(
+              "dispose called on an instance that's not registered with GetIt ($controllerName)");
         }
         return disposeIfPossible(controller);
       default:

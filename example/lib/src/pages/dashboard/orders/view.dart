@@ -32,7 +32,8 @@ class OrdersView extends StatelessWidget {
               context.goNamed(
                 AppRouteNames.kOrderDetails,
                 params: {
-                  kOrderId: controller.dashboardShellController.generateRandomId(),
+                  kOrderId:
+                      controller.dashboardShellController.generateRandomId(),
                 },
               );
             },

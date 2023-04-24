@@ -31,7 +31,8 @@ class UserDetailsView extends StatelessWidget {
           const SizedBox(height: 8),
           ElevatedButton(
             onPressed: () {
-              final newId = controller.dashboardShellController.generateRandomId();
+              final newId =
+                  controller.dashboardShellController.generateRandomId();
               context.goNamed(
                 AppRouteNames.kUserDetails,
                 params: {
@@ -40,7 +41,8 @@ class UserDetailsView extends StatelessWidget {
                 extra: newId,
               );
             },
-            child: const Text("Go to another random user (same route navigation)"),
+            child:
+                const Text("Go to another random user (same route navigation)"),
           ),
           const SizedBox(height: 8),
           ElevatedButton(

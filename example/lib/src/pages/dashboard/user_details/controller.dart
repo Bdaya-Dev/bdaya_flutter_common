@@ -1,5 +1,4 @@
 import 'package:example/common.dart';
-import 'package:flutter/foundation.dart';
 
 import '../_shell/controller.dart';
 
@@ -9,7 +8,8 @@ class UserDetailsController extends BdayaCombinedController {
 
   final String userId;
   final queryParams = SharedValue<Map<String, String>>(value: {});
-  UserDetailsController(this.dashboardShellController, @factoryParam this.userId);
+  UserDetailsController(
+      this.dashboardShellController, @factoryParam this.userId);
   void onQueryParamsChanged(Map<String, String> newParams) {
     //
     logger.info('QueryParams changed: $newParams');
@@ -25,7 +25,9 @@ class UserDetailsController extends BdayaCombinedController {
     super.beforeRender(context);
     initFromUserId(userId);
     registerStream(
-      queryParams.streamWithInitial.distinct(const DeepCollectionEquality().equals).listen(onQueryParamsChanged),
+      queryParams.streamWithInitial
+          .distinct(const DeepCollectionEquality().equals)
+          .listen(onQueryParamsChanged),
     );
   }
 }

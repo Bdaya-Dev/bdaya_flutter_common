@@ -1,4 +1,21 @@
-## 3.0.0 - 09/02/2022
+## 4.0.0 - 25/04/2023
+
+* Change dart version constraint to be ">=2.19.0 <4.0.0"
+* Change flutter version constraint to be ">=3.7.0"
+* Added `BdayaMultiLoadableAreaWrapper` to handle listening to multiple loadable areas at once
+* Added `withLoadableArea` to `BdayaIsLoadingMixin` to make it easier to create loadable areas
+    * Before
+        ```dart
+        final area1 = BdayaIsLoadingMixin.createLoadableArea(name: "area 1");
+        final area2 = BdayaIsLoadingMixin.createLoadableArea(name: "area 2", isLoading: true);
+        ```
+    * After:
+        ```dart
+        late final area1 = withLoadableArea(name: "area 1");
+        late final area2 = withLoadableArea(name: "area 2", isLoading: true);
+        ```
+
+## 3.0.0 - 09/02/2023
 
 * [Breaking] rename `LocalizedStrValueAccessor` to `BdayaLocalizedStrValueAccessor`
 * [Breaking] rename `ReactiveLocalizedFormField` to `BdayaReactiveLocalizedFormField`

@@ -21,7 +21,8 @@ mixin BdayaIsLoadingMixin {
     defaultArea.stopLoadingSuccess();
   }
 
-  void stopLoadingError(Object error, [StackTrace? st, Logger? logger, String? message]) {
+  void stopLoadingError(Object error,
+      [StackTrace? st, Logger? logger, String? message]) {
     defaultArea.stopLoadingError(error, st, logger, message);
   }
 
@@ -36,6 +37,12 @@ mixin BdayaIsLoadingMixin {
       ),
     );
   }
+
+  BdayaRxLoadableArea withLoadableArea({
+    required String name,
+    bool isLoading = false,
+  }) =>
+      createLoadableArea(name: name, isLoading: isLoading);
 }
 
 extension BdayaLoadableAreaExt on BdayaRxLoadableArea {
@@ -47,10 +54,12 @@ extension BdayaLoadableAreaExt on BdayaRxLoadableArea {
     update((p0) => p0.copyWith(isLoading: false, error: null, st: null));
   }
 
-  void stopLoadingError(Object error, [StackTrace? st, Logger? logger, String? message]) {
+  void stopLoadingError(Object error,
+      [StackTrace? st, Logger? logger, String? message]) {
     update((p0) => p0.copyWith(isLoading: false, error: error, st: st));
     if (logger != null) {
-      logger.severe("[${$.displayName}] ${message ?? 'Error Occured:'}", error, st);
+      logger.severe(
+          "[${$.displayName}] ${message ?? 'Error Occured:'}", error, st);
     }
   }
 }
