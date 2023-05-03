@@ -1,6 +1,6 @@
 import 'package:example/common.dart';
 import 'controller.dart';
-
+import 'package:go_router/go_router.dart';
 class UsersView extends StatelessWidget {
   const UsersView({
     super.key,
@@ -29,9 +29,10 @@ class UsersView extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
+              GoRouter.of(context).namedLocation('name', pathParameters: {});
               context.goNamed(
                 AppRouteNames.kUserDetails,
-                params: {
+                pathParameters: {
                   kUserId:
                       controller.dashboardShellController.generateRandomId(),
                 },

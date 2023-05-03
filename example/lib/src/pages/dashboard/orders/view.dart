@@ -1,4 +1,5 @@
 import 'package:example/common.dart';
+import 'package:go_router/go_router.dart';
 import 'controller.dart';
 
 class OrdersView extends StatelessWidget {
@@ -31,7 +32,7 @@ class OrdersView extends StatelessWidget {
             onPressed: () {
               context.goNamed(
                 AppRouteNames.kOrderDetails,
-                params: {
+                pathParameters: {
                   kOrderId:
                       controller.dashboardShellController.generateRandomId(),
                 },

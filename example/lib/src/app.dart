@@ -1,7 +1,7 @@
-import 'package:bdaya_flutter_common/generated/l10n.dart';
 import 'package:example/common.dart';
 import 'package:example/src/pages/splash_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:go_router/go_router.dart';
 
 class ExampleApp extends StatelessWidget {
   const ExampleApp({super.key});
@@ -18,7 +18,6 @@ class ExampleApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         BdayaLocalizationsExample.delegate,
-        BdayaLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,

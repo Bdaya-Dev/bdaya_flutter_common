@@ -1,6 +1,6 @@
 import 'package:example/common.dart';
 import 'controller.dart';
-
+import 'package:go_router/go_router.dart';
 class DashboardHomeView extends StatelessWidget {
   const DashboardHomeView({
     super.key,

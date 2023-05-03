@@ -1,4 +1,5 @@
 import 'package:example/common.dart';
+import 'package:go_router/go_router.dart';
 
 import 'pages/auth/auth_view.dart';
 import 'pages/dashboard/_shell/view.dart';
@@ -70,7 +71,7 @@ List<RouteBase> appRoutesList(GoRouterRefreshService goRouterRefreshService) =>
               final goRouter = getIt<GoRouter>();
               final isAuthed = authService.isAuthed.$;
               if (isAuthed) {
-                final targetUri = state.queryParams[kReturnTo] ??
+                final targetUri = state.queryParameters[kReturnTo] ??
                     goRouter.namedLocation(AppRouteNames.kDashboardHome);
                 return targetUri;
               } else {
@@ -107,7 +108,7 @@ List<RouteBase> appRoutesList(GoRouterRefreshService goRouterRefreshService) =>
                   if (!isAuthed) {
                     final newUrl = router.namedLocation(
                       AppRouteNames.kAuth,
-                      queryParams: {
+                      queryParameters: {
                         kReturnTo: state.location,
                       },
                     );
@@ -168,8 +169,8 @@ List<RouteBase> appRoutesList(GoRouterRefreshService goRouterRefreshService) =>
                           builder: (context) => UserDetailsView(
                             controller: useBdayaViewController(
                               hookMode: BdayaGetItHookMode.factory,
-                              param1: state.params[kUserId],
-                            )..queryParams.$ = state.queryParams,
+                              param1: state.pathParameters[kUserId],
+                            )..queryParams.$ = state.queryParameters,
                           ),
                         ),
                       ),

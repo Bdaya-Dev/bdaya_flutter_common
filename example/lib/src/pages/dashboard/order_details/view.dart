@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:example/common.dart';
 import 'controller.dart';
+import 'package:go_router/go_router.dart';
 
 class OrderDetailsView extends StatelessWidget {
   const OrderDetailsView({
@@ -35,7 +36,7 @@ class OrderDetailsView extends StatelessWidget {
                   controller.dashboardShellController.generateRandomId();
               context.goNamed(
                 AppRouteNames.kOrderDetails,
-                params: {
+                pathParameters: {
                   kOrderId: newId,
                 },
                 extra: newId,
@@ -49,9 +50,9 @@ class OrderDetailsView extends StatelessWidget {
             onPressed: () {
               final newNumber = Random().nextInt(1000);
               //shouldn't call initFromOrderId
-              context.goNamed(AppRouteNames.kOrderDetails, params: {
+              context.goNamed(AppRouteNames.kOrderDetails, pathParameters: {
                 kOrderId: orderId,
-              }, queryParams: {
+              }, queryParameters: {
                 'number': newNumber.toString(),
               });
             },

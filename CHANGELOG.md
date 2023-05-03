@@ -1,3 +1,7 @@
+## 5.0.0 - 03/05/2023
+
+* [Breaking] upgrade `go_router` to v7.0.0
+
 ## 4.0.0 - 25/04/2023
 
 * Change dart version constraint to be ">=2.19.0 <4.0.0"

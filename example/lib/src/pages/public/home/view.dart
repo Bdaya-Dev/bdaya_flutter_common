@@ -1,4 +1,5 @@
 import 'package:example/common.dart';
+import 'package:go_router/go_router.dart';
 import 'controller.dart';
 
 class PublicHomeView extends StatelessWidget {
