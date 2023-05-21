@@ -9,10 +9,6 @@ environment:
 
 flutter:
   uses-material-design: true
-flutter_intl:
-  enabled: true
-  class_name: BdayaLocalizations
-
 dependencies:
   flutter:
     sdk: flutter
@@ -25,7 +21,7 @@ dependencies:
   rxdart: ^0.27.5
   reactive_forms: ^14.1.0
   collection: ^1.16.0
-  injectable: ^2.1.0  
+  injectable: ^2.1.0
   url_strategy: ^0.2.0
   ansicolor: ^2.0.1
 
