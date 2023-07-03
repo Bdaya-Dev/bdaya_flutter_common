@@ -1,3 +1,8 @@
+## 6.0.0 - 03/07/2023
+
+* [Breaking] upgrade `go_router` to v9.0.0
+* [Breaking] upgrade `reactive_forms` to v16.0.0
+
 ## 5.0.0 - 03/05/2023
 
 * [Breaking] upgrade `go_router` to v7.0.0

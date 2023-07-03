@@ -1,7 +1,7 @@
 import 'package:bdaya_flutter_common/bdaya_flutter_common.dart';
 import 'package:flutter/widgets.dart';
 // ignore: implementation_imports
-import 'package:go_router/src/matching.dart';
+import 'package:go_router/src/match.dart';
 import 'package:go_router/go_router.dart';
 
 typedef GoRouterRouteMatch = RouteMatchList;
@@ -17,7 +17,7 @@ mixin BdayaRouterListenableMixin on BdayaDisposeHandlerMixin {
     onRouteInformationChanged(value);
     if (this is BdayaLoggableMixin) {
       (this as BdayaLoggableMixin).logger.finest(
-            'onRouteInformationChanged, location: ${goRouter.location}, extra: ${value.extra}',
+            'onRouteInformationChanged, location: ${value.uri.toString()}, extra: ${value.extra}',
           );
     }
   }
@@ -29,7 +29,7 @@ mixin BdayaRouterListenableMixin on BdayaDisposeHandlerMixin {
   void beforeRender(BuildContext context) {
     super.beforeRender(context);
     registerListenable(
-      goRouter,
+      goRouter.routerDelegate,
       _onRouteInformationChanged,
       callbackNow: callOnRouteChangedInitially,
     );

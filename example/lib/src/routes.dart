@@ -36,7 +36,7 @@ class AppRouteNames {
   static const kUserDetails = 'user_details';
 }
 
-List<RouteBase> appRoutesList(GoRouterRefreshService goRouterRefreshService) =>
+List<RouteBase> appRoutesList() =>
     [
       ShellRoute(
         navigatorKey: appShellNavigatorKey,

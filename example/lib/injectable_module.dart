@@ -17,6 +17,6 @@ abstract class RegisterModule {
         //   return null;
         // },
         refreshListenable: goRouterRefreshService,
-        routes: appRoutesList(goRouterRefreshService),
+        routes: appRoutesList(),
       );
 }

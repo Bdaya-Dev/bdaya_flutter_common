@@ -29,7 +29,6 @@ class UsersView extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              GoRouter.of(context).namedLocation('name', pathParameters: {});
               context.goNamed(
                 AppRouteNames.kUserDetails,
                 pathParameters: {
