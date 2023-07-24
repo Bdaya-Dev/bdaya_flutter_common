@@ -69,9 +69,9 @@ List<RouteBase> appRoutesList() =>
             redirect: (context, state) {
               final authService = getIt<AuthService>();
               final goRouter = getIt<GoRouter>();
-              final isAuthed = authService.isAuthed.$;
+              final isAuthed = authService.isAuthed.of(context);
               if (isAuthed) {
-                final targetUri = state.queryParameters[kReturnTo] ??
+                final targetUri = state.uri.queryParameters[kReturnTo] ??
                     goRouter.namedLocation(AppRouteNames.kDashboardHome);
                 return targetUri;
               } else {
@@ -101,15 +101,14 @@ List<RouteBase> appRoutesList() =>
                 name: AppRouteNames.kDashboardHome,
                 redirect: (context, state) {
                   // final router = GoRouter.of(context); this is not possible because GoRouter doesn't exist in this context
-                  final router = getIt<GoRouter>();
                   final authService = getIt<AuthService>();
-                  final isAuthed = authService.isAuthed.$;
+                  final isAuthed = authService.isAuthed.of(context);
 
                   if (!isAuthed) {
-                    final newUrl = router.namedLocation(
+                    final newUrl = state.namedLocation(
                       AppRouteNames.kAuth,
                       queryParameters: {
-                        kReturnTo: state.location,
+                        kReturnTo: state.uri.toString(),
                       },
                     );
                     return newUrl.toString();
@@ -170,7 +169,7 @@ List<RouteBase> appRoutesList() =>
                             controller: useBdayaViewController(
                               hookMode: BdayaGetItHookMode.factory,
                               param1: state.pathParameters[kUserId],
-                            )..queryParams.$ = state.queryParameters,
+                            )..queryParams.$ = state.uri.queryParameters,
                           ),
                         ),
                       ),

@@ -41,7 +41,7 @@ class __BdayaRouterStateHookState
     super.initHook();
     routerState = hook.routerState;
     logger.info(
-      'registering router state with location: ${routerState.location}',
+      'registering router state with location: ${routerState.uri.toString()}',
     );
     GetIt.I.registerSingleton<GoRouterState>(routerState);
     final testState = GetIt.I<GoRouterState>();
