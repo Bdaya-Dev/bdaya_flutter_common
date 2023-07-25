@@ -15,6 +15,7 @@ TController useBdayaViewController<TController extends Object>({
   Object? param1,
   Object? param2,
   List<Object?>? keys,
+  GetIt? getIt,
 }) =>
     use(
       _BdayaViewControllerHook<TController>(
@@ -23,8 +24,11 @@ TController useBdayaViewController<TController extends Object>({
         param1: param1,
         param2: param2,
         hookMode: hookMode,
+        getIt: getIt,
       ),
     );
+
+final _expando = Expando<int>('hook_reference_counter');
 
 class _BdayaViewControllerHook<TController extends Object>
     extends Hook<TController> {
@@ -34,11 +38,13 @@ class _BdayaViewControllerHook<TController extends Object>
     required this.param1,
     required this.param2,
     required this.hookMode,
+    required this.getIt,
   });
   final String? instanceName;
   final Object? param1;
   final Object? param2;
   final BdayaGetItHookMode hookMode;
+  final GetIt? getIt;
 
   @override
   HookState<TController, Hook<TController>> createState() =>
@@ -47,14 +53,17 @@ class _BdayaViewControllerHook<TController extends Object>
 
 class _BdayaViewControllerHookState<TController extends Object>
     extends HookState<TController, _BdayaViewControllerHook<TController>> {
+  GetIt get getIt => hook.getIt ?? GetIt.instance;
   late TController controller;
   final logger = Logger('Hooks.ViewController');
   void setController() {
-    controller = GetIt.I<TController>(
+    controller = getIt<TController>(
       instanceName: hook.instanceName,
       param1: hook.param1,
       param2: hook.param2,
     );
+    _expando[controller] = (_expando[controller] ?? 0) + 1;
+
     if (controller is BdayaLifeCycleMixin) {
       final casted = controller as BdayaLifeCycleMixin;
       casted.beforeRender(context);
@@ -106,10 +115,20 @@ class _BdayaViewControllerHookState<TController extends Object>
       }
     }
 
+    var counter = _expando[controller];
+    if (counter != null) {
+      _expando[controller] = --counter;
+    } else {
+      counter = 0;
+    }
+    if (counter > 0) {
+      //don't dispose! some are still depending on it.
+      return null;
+    }
     switch (hook.hookMode) {
       case BdayaGetItHookMode.lazySingleton:
-        if (GetIt.I.isRegistered<TController>(instance: controller)) {
-          return GetIt.I.resetLazySingleton<TController>(
+        if (getIt.isRegistered<TController>(instance: controller)) {
+          return getIt.resetLazySingleton<TController>(
             instance: controller,
             disposingFunction: disposeIfPossible,
           );
@@ -125,9 +144,9 @@ class _BdayaViewControllerHookState<TController extends Object>
         //instances are never registed as a factory, so only dispose
         return disposeIfPossible(controller);
       case BdayaGetItHookMode.singleton:
-        if (GetIt.I.isRegistered<TController>(instance: controller)) {
+        if (getIt.isRegistered<TController>(instance: controller)) {
           logger.warning(
-            "Hook mode singleton doesn't make since it will be disposed once, consider making this a global service instead, or switch to lazySingleton/factory",
+            "Hook mode singleton doesn't make sense, since it will be disposed once, consider making this a global service instead, or switch to lazySingleton/factory",
           );
         } else {
           final controllerName = controller is BdayaLoggableMixin

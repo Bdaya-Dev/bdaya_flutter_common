@@ -1,3 +1,7 @@
+## 7.0.1 - 25/07/2023
+
+* fix: Prevent disposing controllers used in `useBdayaViewController` when they are being referenced by other views.
+
 ## 7.0.0 - 24/07/2023
 
 * [Breaking] upgrade `go_router` to v10.0.0
