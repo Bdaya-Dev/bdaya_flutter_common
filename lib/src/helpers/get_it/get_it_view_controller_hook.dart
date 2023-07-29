@@ -62,7 +62,9 @@ class _BdayaViewControllerHookState<TController extends Object>
       param1: hook.param1,
       param2: hook.param2,
     );
-    _expando[controller] = (_expando[controller] ?? 0) + 1;
+    if (hook.hookMode != BdayaGetItHookMode.factory) {
+      _expando[controller] = (_expando[controller] ?? 0) + 1;
+    }
 
     if (controller is BdayaLifeCycleMixin) {
       final casted = controller as BdayaLifeCycleMixin;
@@ -115,16 +117,19 @@ class _BdayaViewControllerHookState<TController extends Object>
       }
     }
 
-    var counter = _expando[controller];
-    if (counter != null) {
-      _expando[controller] = --counter;
-    } else {
-      counter = 0;
+    if (hook.hookMode != BdayaGetItHookMode.factory) {
+      var counter = _expando[controller];
+      if (counter != null) {
+        _expando[controller] = --counter;
+      } else {
+        counter = 0;
+      }
+      if (counter > 0) {
+        //don't dispose! some are still depending on it.
+        return null;
+      }
     }
-    if (counter > 0) {
-      //don't dispose! some are still depending on it.
-      return null;
-    }
+
     switch (hook.hookMode) {
       case BdayaGetItHookMode.lazySingleton:
         if (getIt.isRegistered<TController>(instance: controller)) {
