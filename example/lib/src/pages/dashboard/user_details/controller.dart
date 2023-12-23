@@ -9,12 +9,16 @@ class UserDetailsController extends BdayaCombinedController {
   final String userId;
   final queryParams = SharedValue<Map<String, String>>(value: {});
   UserDetailsController(
-      this.dashboardShellController, @factoryParam this.userId);
+    this.dashboardShellController,
+    @factoryParam this.userId,
+  );
+
   void onQueryParamsChanged(Map<String, String> newParams) {
     //
     logger.info('QueryParams changed: $newParams');
   }
 
+  
   Future<void> initFromUserId(String userId) async {
     //Initialization logic
     logger.info('Initializing userId $userId, queryParams: ${queryParams.$}');

@@ -1,7 +1,7 @@
 import 'package:example/common.dart';
 import 'package:go_router/go_router.dart';
 
-import 'pages/auth/auth_view.dart';
+import 'pages/auth/view.dart';
 import 'pages/dashboard/_shell/view.dart';
 import 'pages/dashboard/home/view.dart';
 import 'pages/dashboard/order_details/view.dart';

@@ -1,7 +1,6 @@
 import 'package:example/common.dart';
 
 abstract class AuthService with BdayaLoggableMixin {
-  final GoRouterRefreshService refreshService;
   final isAuthed = SharedValue(
     value: false,
     key: 'isAuthed',
@@ -9,10 +8,9 @@ abstract class AuthService with BdayaLoggableMixin {
     customDecode: (val) => val == 'true',
   );
 
-  AuthService(this.refreshService);
+  AuthService();
 
-  Future<void> init() async {
-    refreshService.registerStream(isAuthed.stream);
+  Future<void> init() async {    
     await isAuthed.load();
   }
 
@@ -22,7 +20,7 @@ abstract class AuthService with BdayaLoggableMixin {
 
 @LazySingleton(as: AuthService)
 class MockAuthService extends AuthService {
-  MockAuthService(super.refreshService);
+  MockAuthService();
 
   @override
   Future<void> login() async {
