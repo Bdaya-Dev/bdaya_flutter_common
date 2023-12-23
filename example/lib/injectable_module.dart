@@ -5,7 +5,7 @@ import 'common.dart';
 @module
 abstract class RegisterModule {
   @lazySingleton
-  GoRouter getRouter(GoRouterRefreshService goRouterRefreshService) => GoRouter(
+  GoRouter getRouter() => GoRouter(
         observers: [
           // seoRouteObserver,
         ],
@@ -16,7 +16,6 @@ abstract class RegisterModule {
         //   // }
         //   return null;
         // },
-        refreshListenable: goRouterRefreshService,
         routes: appRoutesList(),
       );
 }

@@ -1,3 +1,8 @@
+## 8.0.0 - 23/12/2023
+
+* [Breaking]: upgrade `go_router` to v13.0.0
+* Remove `GoRouterRefreshService` since it is not needed anymore.
+
 ## 7.0.2 - 29/07/2023
 
 * fix: maintain old `useBdayaViewController` behavior when in `factory` mode
